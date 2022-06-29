@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "haproxy" do |haproxy|
     haproxy.vm.box = "ubuntu/bionic64"
     haproxy.vm.hostname = "haproxy"
-    haproxy.vm.network "private_network", ip: "10.10.10.10", netmask: "255.255.255.0"
+    haproxy.vm.network "private_network", ip: "192.168.56.10", netmask: "255.255.255.0"
 
     # virtualbox setup
     haproxy.vm.provider "virtualbox" do |vb|
@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "docker01" do |docker01|
     docker01.vm.box = "ubuntu/bionic64"
     docker01.vm.hostname = "docker01"
-    docker01.vm.network "private_network", ip: "10.10.10.20", netmask: "255.255.255.0"
+    docker01.vm.network "private_network", ip: "192.168.56.20", netmask: "255.255.255.0"
     docker01.disksize.size = '20GB'
 
     # virtualbox setup
@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "docker02" do |docker02|
     docker02.vm.box = "ubuntu/bionic64"
     docker02.vm.hostname = "docker02"
-    docker02.vm.network "private_network", ip: "10.10.10.30", netmask: "255.255.255.0"
+    docker02.vm.network "private_network", ip: "192.168.56.30", netmask: "255.255.255.0"
     docker02.disksize.size = '20GB'
 
     # virtualbox setup
@@ -77,7 +77,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "docker03" do |docker03|
     docker03.vm.box = "ubuntu/bionic64"
     docker03.vm.hostname = "docker03"
-    docker03.vm.network "private_network", ip: "10.10.10.40", netmask: "255.255.255.0"
+    docker03.vm.network "private_network", ip: "192.168.56.40", netmask: "255.255.255.0"
     docker03.disksize.size = '20GB'
 
     # virtualbox setup

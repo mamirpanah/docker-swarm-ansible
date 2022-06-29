@@ -26,7 +26,7 @@
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
         name: gluster
-
+  tags: gluster   
 - hosts: swarm_managers
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
