@@ -1,19 +1,18 @@
-[haproxy]
-192.168.56.10
-
-[swarm_managers]
-192.168.56.20
-192.168.56.30
-192.168.56.40
+[all]
+172.20.9.53
+172.20.9.54
+172.20.9.52
+172.20.9.44
+172.20.9.17
 
 [gluster_nodes]
-192.168.56.20
-192.168.56.30
-192.168.56.40
+172.20.9.53
+172.20.9.54
+172.20.9.52
+172.20.9.44
+172.20.9.17
 
 [all:vars]
 ansible_connection=ssh
-ansible_user=ubuntu
-ansible_ssh_pass=ubuntu
-ansible_become_pass=ubuntu
+ansible_ssh_user=vagrant
 device2_hdd_dev=/dev/sdb

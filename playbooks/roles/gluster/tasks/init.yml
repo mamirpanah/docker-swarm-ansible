@@ -24,10 +24,12 @@
   become_method: sudo
   shell: >
     gluster volume create {{gluster_volume_name}} \
-    replica 3 \
+    replica 5 \
     {{groups['gluster_nodes'][0]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][0]}}/brick \
     {{groups['gluster_nodes'][1]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][1]}}/brick \
-    {{groups['gluster_nodes'][2]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][2]}}/brick
+    {{groups['gluster_nodes'][2]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][2]}}/brick \
+    {{groups['gluster_nodes'][3]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][3]}}/brick \
+    {{groups['gluster_nodes'][4]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][4]}}/brick force
 
 - name: Secure Gluster Volume (on first node)
   when: inventory_hostname == groups['gluster_nodes'][0]
@@ -35,7 +37,7 @@
   become_method: sudo
   shell: >
     gluster volume set {{gluster_volume_name}} auth.allow  \
-    {{groups['gluster_nodes'][0]}},{{groups['gluster_nodes'][1]}},{{groups['gluster_nodes'][2]}}
+    {{groups['gluster_nodes'][0]}},{{groups['gluster_nodes'][1]}},{{groups['gluster_nodes'][2]}},{{groups['gluster_nodes'][3]}},{{groups['gluster_nodes'][4]}}
 
 - name: Start Gluster Volume (on first node)
   when: glustervolume.stat.exists == false and inventory_hostname == groups['gluster_nodes'][0]

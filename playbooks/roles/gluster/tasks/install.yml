@@ -1,4 +1,17 @@
 ---
+- name: Adding repository of Glusterfs
+  become: true
+  become_method: sudo
+  shell: |
+    sudo wget --no-check-certificate -O - https://download.gluster.org/pub/gluster/glusterfs/10/rsa.pub | sudo apt-key add -
+    DEBID=$(grep 'VERSION_ID=' /etc/os-release | cut -d '=' -f 2 | tr -d '"')
+    DEBVER=$(grep 'VERSION=' /etc/os-release | grep -Eo '[a-z]+')
+    DEBARCH=$(dpkg --print-architecture)
+    echo deb https://download.gluster.org/pub/gluster/glusterfs/LATEST/Debian/${DEBID}/${DEBARCH}/apt ${DEBVER} main | sudo tee /etc/apt/sources.list.d/gluster.list
+  register: repo
+
+- debug: msg="{{ repo.stdout_lines }}"
+
 - name: Install Gluster and dependencies
   become: true
   become_method: sudo
@@ -12,6 +25,10 @@
     state: present
     force_apt_get: true
     update_cache: yes
+  register: installs
+
+- debug:
+    var: installs
 
 - name: Enable Gluster service
   become: true
