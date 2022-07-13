@@ -3,6 +3,45 @@
   become: true
   become_method: sudo
   tasks:
+<<<<<<< HEAD
+    - include_vars: "{{playbook_dir}}/config.yml"
+
+    - name: Unmount Gluster volume {{gluster_volume_name}} from {{gluster_mount_path}}
+      shell: umount -f {{gluster_mount_path}}
+      register: uumount
+      ignore_errors: yes
+      
+    - debug:
+        var: uumount
+
+    - name: Stop and remove bricks of Glusterfs
+      shell: |
+        echo 'y' | gluster volume stop {{gluster_volume_name}} force;
+        echo 'y' | gluster volume remove-brick {{gluster_volume_name}} {{inventory_hostname}}:{{gluster_volume_path}}/{{inventory_hostname}}/brick start force;
+        sleep 10;
+        echo 'y' | gluster volume remove-brick {{gluster_volume_name}} {{inventory_hostname}}:{{gluster_volume_path}}/{{inventory_hostname}}/brick commit force;
+        echo 'y' | gluster volume delete {{gluster_volume_name}} force;
+        rm -rf {{gluster_volume_path}};
+      register: volumeremove
+
+    - debug:
+        var: volumeremove
+
+    - name: Remove and detach peer of Glusterfs
+      when: inventory_hostname == groups['gluster_nodes'][0]
+      shell: |
+        echo 'y' | gluster volume delete {{gluster_volume_name}};
+        echo 'y' | gluster peer detach {{groups['gluster_nodes'][1]}};
+        echo 'y' | gluster peer detach {{groups['gluster_nodes'][2]}};
+        echo 'y' | gluster peer detach {{groups['gluster_nodes'][3]}};
+        echo 'y' | gluster peer detach {{groups['gluster_nodes'][4]}};
+      register: peerremove
+
+    - debug:
+        var: peerremove
+
+=======
+>>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
     - name: Disable Gluster service
       systemd:
         name: glusterd
@@ -10,8 +49,11 @@
         state: stopped
 
     - name: Uninstall Gluster and dependencies
+<<<<<<< HEAD
+=======
       become: true
       become_method: sudo
+>>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
       apt:
         pkg:
           - glusterfs-server
@@ -21,4 +63,8 @@
       register: uninstall
       
     - debug:
+<<<<<<< HEAD
+        var: uninstall
+=======
         var: uninstall.stdout_lines 
+>>>>>>> c734ffe48f3070ef93139c33175622fd064a6810

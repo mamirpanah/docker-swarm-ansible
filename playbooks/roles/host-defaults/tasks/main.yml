@@ -33,14 +33,43 @@
   ignore_errors: true
   when: autoupdate.stat.exists and inventory_hostname != "127.0.0.1" and inventory_hostname != "localhost"
 
-# - name: Upgrade all packages to the latest version
-#   become: true
-#   become_method: sudo
-#   apt:
-#     name: "*"
-#     state: latest
-#     force_apt_get: true
-#     update_cache: yes
+- name: Verify apt config file releaseinfochange
+  become: true
+  become_method: sudo
+  file:
+    path: /etc/apt/apt.conf.d/80ssl-exceptions
+    state: touch
+
+- name: Allow release info change
+  become: true
+  become_method: sudo
+  lineinfile:
+    path: /etc/apt/apt.conf.d/90releaseinfochange
+    state: present
+    create: yes
+    line: Acquire::AllowReleaseInfoChange::Suite "true";
+
+- name: Disable certificate checking
+  become: true
+  become_method: sudo
+  blockinfile:
+    dest: /etc/apt/apt.conf.d/80ssl-exceptions
+    state: present
+    marker: "## {mark} added by ansible"
+    block: |
+      Acquire::https::download.gluster.org::Verify-Peer "false";
+      Acquire::https::download.gluster.org::Verify-Host "false";
+- debug: 
+    var: exception
+    
+- name: Upgrade all packages to the latest version
+  become: true
+  become_method: sudo
+  apt:
+    name: "*"
+    state: latest
+    force_apt_get: true
+    update_cache: yes
 
 - name: Verify system dependencies
   become: true
