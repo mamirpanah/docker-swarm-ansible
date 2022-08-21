@@ -1,8 +1,21 @@
-<<<<<<< HEAD
 [all]
-=======
+192.168.56.10
+192.168.56.20
+192.168.56.30
+192.168.56.40
+192.168.56.50
+
+[haproxy]
+192.168.56.10
+
 [swarm_managers]
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
+192.168.56.10
+192.168.56.20
+192.168.56.30
+192.168.56.40
+192.168.56.50
+
+[swarm_workers]
 192.168.56.10
 192.168.56.20
 192.168.56.30
@@ -20,4 +33,5 @@
 ansible_connection=ssh
 ansible_user=vagrant
 ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
-device2_hdd_dev=/dev/sdc
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+device2_hdd_dev=/dev/sda1

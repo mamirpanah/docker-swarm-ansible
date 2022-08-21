@@ -1,11 +1,13 @@
 ---
 - hosts: all
+  order: sorted
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
         name: host-defaults
 
 - hosts: gluster_nodes
+  order: sorted
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:

@@ -14,11 +14,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "docker01" do |docker01|
     docker01.vm.box = "debian/buster64"
-<<<<<<< HEAD
     docker01.vm.box_version = "10.4.0"
-=======
-    docker01.vm.box_version = "11.20220328.1"
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
     docker01.vm.hostname = "docker01"
     docker01.vm.network "private_network", ip: "192.168.56.10", netmask: "255.255.255.0"
     docker01.disksize.size = '20GB'
@@ -49,11 +45,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "docker02" do |docker02|
     docker02.vm.box = "debian/buster64"
-<<<<<<< HEAD
     docker02.vm.box_version = "10.4.0"
-=======
-    docker02.vm.box_version = "11.20220328.1"
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
     docker02.vm.hostname = "docker02"
     docker02.vm.network "private_network", ip: "192.168.56.20", netmask: "255.255.255.0"
     docker02.disksize.size = '20GB'
@@ -110,7 +102,6 @@ Vagrant.configure("2") do |config|
 
       # Attach disk to VM
       vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--type', 'hdd', '--medium', second_disk]
-<<<<<<< HEAD
     end
   end
   config.vm.define "docker04" do |docker04|
@@ -143,49 +134,13 @@ Vagrant.configure("2") do |config|
       vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--type', 'hdd', '--medium', second_disk]
     end
   end
-=======
-    end
-  end
-  config.vm.define "docker04" do |docker04|
-    docker04.vm.box = "debian/buster64"
-    docker04.vm.box_version = "10.4.0"
-    docker04.vm.hostname = "docker04"
-    docker04.vm.network "private_network", ip: "192.168.56.40", netmask: "255.255.255.0"
-    docker04.disksize.size = '20GB'
-
-    # virtualbox setup
-    docker04.vm.provider "virtualbox" do |vb|
-      vb.name = "docker04"
-
-      # Set CPU and Ram
-      vb.customize ["modifyvm", :id, "--cpus", "1"]
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
-
-      # Get disk path
-      line = `VBoxManage list systemproperties | grep "Default machine folder"`
-      vb_machine_folder = line.split(':')[1].strip()
-      second_disk = File.join(vb_machine_folder, vb.name, 'disk2.vdi')
-
-      # Create disk
-      unless File.exist?(second_disk)
-        vb.customize ['createmedium', 'disk', '--filename', second_disk, '--size', 10 * 1024]
-      end
-
-      # Attach disk to VM
-      vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--type', 'hdd', '--medium', second_disk]
-    end
-  end
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
   config.vm.define "docker05" do |docker05|
     docker05.vm.box = "debian/buster64"
     docker05.vm.box_version = "10.4.0"
     docker05.vm.hostname = "docker05"
     docker05.vm.network "private_network", ip: "192.168.56.50", netmask: "255.255.255.0"
     docker05.disksize.size = '20GB'
-<<<<<<< HEAD
     docker05.vm.provision "shell", inline: $script
-=======
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
 
     # virtualbox setup
     docker05.vm.provider "virtualbox" do |vb|
@@ -211,3 +166,4 @@ Vagrant.configure("2") do |config|
   end
 
 end
+

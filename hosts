@@ -1,18 +1,19 @@
 [all]
-172.20.9.53
-172.20.9.54
-172.20.9.52
-172.20.9.44
-172.20.9.17
+172.20.9.1
+172.20.9.2
+172.20.9.3
+172.20.9.4
+172.20.9.5
 
 [gluster_nodes]
-172.20.9.53
-172.20.9.54
-172.20.9.52
-172.20.9.44
-172.20.9.17
+172.20.9.1
+172.20.9.2
+172.20.9.3
+172.20.9.4
+172.20.9.5
 
 [all:vars]
 ansible_connection=ssh
 ansible_ssh_user=vagrant
-device2_hdd_dev=/dev/sdb
+device2_hdd_dev=/dev/sda1
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'

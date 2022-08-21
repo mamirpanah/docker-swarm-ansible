@@ -9,7 +9,7 @@
   when: gluster_plugin_status.rc != 0
 
 - name: Set Gluster plugin to use Gluster nodes
-  shell: docker plugin set glusterfs SERVERS={{groups['gluster_nodes'][0]}},{{groups['gluster_nodes'][1]}},{{groups['gluster_nodes'][2]}}
+  shell: docker plugin set glusterfs SERVERS={{groups['gluster_nodes'][0]}},{{groups['gluster_nodes'][1]}}}
   when: gluster_plugin_status.rc != 0
 
 - name: Enable Gluster plugin

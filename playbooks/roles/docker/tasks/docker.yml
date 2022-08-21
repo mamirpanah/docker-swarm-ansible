@@ -21,12 +21,12 @@
 - name: Install Docker GPG key
   become: true
   become_method: sudo
-  shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -"
+  shell: "curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -"
 
 - name: Add Docker repository
   become: true
   become_method: sudo
-  shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 
 - name: Install Docker
   become: true

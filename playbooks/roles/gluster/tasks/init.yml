@@ -24,18 +24,10 @@
   become_method: sudo
   shell: >
     gluster volume create {{gluster_volume_name}} \
-<<<<<<< HEAD
     replica 2 \
     {{groups['gluster_nodes'][0]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][0]}}/brick \
     {{groups['gluster_nodes'][1]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][1]}}/brick force
-=======
-    replica 5 \
-    {{groups['gluster_nodes'][0]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][0]}}/brick \
-    {{groups['gluster_nodes'][1]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][1]}}/brick \
-    {{groups['gluster_nodes'][2]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][2]}}/brick \
-    {{groups['gluster_nodes'][3]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][3]}}/brick \
-    {{groups['gluster_nodes'][4]}}:{{gluster_volume_path}}/{{groups['gluster_nodes'][4]}}/brick force
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
+
 
 - name: Secure Gluster Volume (on first node)
   when: inventory_hostname == groups['gluster_nodes'][0]

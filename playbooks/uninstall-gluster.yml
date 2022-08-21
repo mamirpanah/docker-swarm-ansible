@@ -3,7 +3,6 @@
   become: true
   become_method: sudo
   tasks:
-<<<<<<< HEAD
     - include_vars: "{{playbook_dir}}/config.yml"
 
     - name: Unmount Gluster volume {{gluster_volume_name}} from {{gluster_mount_path}}
@@ -40,8 +39,6 @@
     - debug:
         var: peerremove
 
-=======
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
     - name: Disable Gluster service
       systemd:
         name: glusterd
@@ -49,11 +46,8 @@
         state: stopped
 
     - name: Uninstall Gluster and dependencies
-<<<<<<< HEAD
-=======
       become: true
       become_method: sudo
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
       apt:
         pkg:
           - glusterfs-server
@@ -63,8 +57,5 @@
       register: uninstall
       
     - debug:
-<<<<<<< HEAD
         var: uninstall
-=======
-        var: uninstall.stdout_lines 
->>>>>>> c734ffe48f3070ef93139c33175622fd064a6810
+        var: uninstall.stdout_lines

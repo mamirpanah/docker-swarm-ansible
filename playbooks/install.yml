@@ -1,11 +1,13 @@
 ---
 - hosts: all
+  order: sorted
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
         name: host-defaults
 
 - hosts: swarm_managers
+  order: sorted
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
@@ -14,6 +16,8 @@
         name: swarm-managers
 
 - hosts: swarm_workers
+  order: sorted
+  gather_facts: false
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
@@ -22,6 +26,7 @@
         name: swarm-workers
 
 - hosts: gluster_nodes
+  order: sorted
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
@@ -29,6 +34,7 @@
   tags: gluster   
   
 - hosts: swarm_managers
+  order: sorted
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
@@ -37,7 +43,9 @@
         name: portainer
 
 - hosts: haproxy
+  order: sorted
   tasks:
     - include_vars: "{{playbook_dir}}/config.yml"
     - import_role:
         name: haproxy
+  tags: haproxy

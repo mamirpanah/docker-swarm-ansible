@@ -69,3 +69,5 @@ backend docker_swarm_layer7
   server host01 {{groups['swarm_managers'][0]}}:80 check port 80
   server host02 {{groups['swarm_managers'][1]}}:80 check port 80
   server host03 {{groups['swarm_managers'][2]}}:80 check port 80
+  server host04 {{groups['swarm_managers'][3]}}:80 check port 80
+  server host05 {{groups['swarm_managers'][4]}}:80 check port 80
